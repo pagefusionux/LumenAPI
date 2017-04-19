@@ -15,16 +15,20 @@ $app->get('/', function() use ($app) {
       return "Lumen RESTful API: /";
 });
 
-// Book
-$app->group(['prefix' => 'api/v1','namespace' => 'Book'], function($app)
+// People
+$app->group(['prefix' => 'api/v1'], function($app)
 {
-  $app->get('book','BookController@index');
+  $app->get('people','PeopleController@index');
 
-  $app->get('book/{id}','BookController@getbook');
+  $app->get('people/deleted','PeopleController@getAllDeletedPeople');
 
-  $app->post('book','BookController@createBook');
+  $app->get('people/deleted/{id}','PeopleController@getDeletedPeople');
 
-  $app->put('book/{id}','BookController@updateBook');
+  $app->get('people/{id}','PeopleController@getPeople');
 
-  $app->delete('book/{id}','BookController@deleteBook');
+  $app->post('people','PeopleController@createPeople');
+
+  $app->put('people/{id}','PeopleController@updatePeople');
+
+  $app->delete('people/{id}','PeopleController@deletePeople');
 });
