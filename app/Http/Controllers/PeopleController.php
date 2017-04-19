@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class PeopleController extends Controller {
 
   public function index() {
-    $People = People::all();
+    $People = People::whereNull('deleted_at')->get();
     return response()->json($People);
   }
 
@@ -26,6 +26,11 @@ class PeopleController extends Controller {
 
   public function getDeletedPeople($id) {
     $People = People::onlyTrashed()->where('id', $id)->get();
+    return response()->json($People);
+  }
+
+  public function restorePeople($id) {
+    $People = People::onlyTrashed()->where('id', $id)->restore();
     return response()->json($People);
   }
 

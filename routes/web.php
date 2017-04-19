@@ -12,7 +12,7 @@
 */
 
 $app->get('/', function() use ($app) {
-      return "Lumen RESTful API: /";
+      return "Lumen RESTful API for Clearlink Lead";
 });
 
 // People
@@ -23,6 +23,8 @@ $app->group(['prefix' => 'api/v1'], function($app)
   $app->get('people/deleted','PeopleController@getAllDeletedPeople');
 
   $app->get('people/deleted/{id}','PeopleController@getDeletedPeople');
+
+  $app->get('people/restore/{id}','PeopleController@restorePeople');
 
   $app->get('people/{id}','PeopleController@getPeople');
 
